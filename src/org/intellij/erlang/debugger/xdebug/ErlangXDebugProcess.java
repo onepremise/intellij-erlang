@@ -55,7 +55,6 @@ import org.intellij.erlang.debugger.remote.ErlangRemoteDebugRunConfiguration;
 import org.intellij.erlang.debugger.remote.ErlangRemoteDebugRunningState;
 import org.intellij.erlang.debugger.xdebug.xvalue.ErlangXValueFactory;
 import org.intellij.erlang.psi.ErlangFile;
-import org.intellij.erlang.rebar.util.RebarConfigUtil;
 import org.intellij.erlang.runconfig.ErlangRunConfigurationBase;
 import org.intellij.erlang.runconfig.ErlangRunningState;
 import org.intellij.erlang.utils.ErlangModulesUtil;
@@ -340,7 +339,6 @@ public class ErlangXDebugProcess extends XDebugProcess implements ErlangDebugger
       myRunningState.setWorkDirectory(commandLine);
       setUpErlangDebuggerCodePath(commandLine);
       myRunningState.setCodePath(commandLine);
-      myRunningState.setErlangRebarDependencies(commandLine);
       myRunningState.setErlangAppConfig(commandLine);
       commandLine.addParameters("-run", "debugnode", "main", String.valueOf(myDebuggerNode.getLocalDebuggerPort()));
       myRunningState.setErlangFlags(commandLine);

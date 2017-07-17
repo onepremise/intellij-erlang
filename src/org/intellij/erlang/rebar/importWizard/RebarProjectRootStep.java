@@ -40,7 +40,6 @@ import com.intellij.projectImport.ProjectImportWizardStep;
 import org.intellij.erlang.jps.model.JpsErlangSdkType;
 import org.intellij.erlang.rebar.runner.RebarRunningStateUtil;
 import org.intellij.erlang.rebar.settings.RebarConfigurationForm;
-import org.intellij.erlang.rebar.util.RebarConfigUtil;
 import org.intellij.erlang.sdk.ErlangSdkType;
 import org.jetbrains.annotations.NotNull;
 

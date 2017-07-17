@@ -44,8 +44,7 @@ public class ErlangDebugOptionsEditorForm extends SettingsEditor<ErlangRunConfig
   private JPanel myContent;
   private JPanel myModulesNotToInterpretPanel;
   private JBCheckBox myAutoUpdateModulesNotToInterpretCheckBox;
-  private JBCheckBox includeRebarDependenenciesFromJBCheckBox;
-  private JBCheckBox fetchDependencies;
+
   private JBCheckBox loadConfig;
   private JBTextField defaultModuleConfigJBTextField;
 
@@ -54,8 +53,6 @@ public class ErlangDebugOptionsEditorForm extends SettingsEditor<ErlangRunConfig
 
   public ErlangDebugOptionsEditorForm() {
     myAutoUpdateModulesNotToInterpretCheckBox.addActionListener(e -> setAutoUpdateModulesNotToInterpret(myAutoUpdateModulesNotToInterpretCheckBox.isSelected()));
-    includeRebarDependenenciesFromJBCheckBox.addActionListener(e -> setIncludeRebarDependenciesFromCheckBox(includeRebarDependenenciesFromJBCheckBox.isSelected()));
-    fetchDependencies.addActionListener(e->setFetchDependenciesFromCheckBox(fetchDependencies.isSelected()));
     loadConfig.addActionListener(e->setloadConfig(loadConfig.isSelected()));
 
     setAppConfig(ErlangRunConfigurationBase.DEFAULT_CONFIG);
@@ -71,8 +68,6 @@ public class ErlangDebugOptionsEditorForm extends SettingsEditor<ErlangRunConfig
     setloadConfig(erlangDebugOptions.isLoadingConfig());
     setAppConfig(erlangDebugOptions.getAppConfig());
     setAutoUpdateModulesNotToInterpret(erlangDebugOptions.isAutoUpdateModulesNotToInterpret());
-    setIncludeRebarDependenciesFromCheckBox(erlangDebugOptions.isIncludingRebarDependencies());
-    setFetchDependenciesFromCheckBox(erlangDebugOptions.isFetchingDependencies());
   }
 
   @Override
@@ -80,8 +75,6 @@ public class ErlangDebugOptionsEditorForm extends SettingsEditor<ErlangRunConfig
     erlangDebugOptions.setLoadingConfig(loadConfig.isSelected());
     erlangDebugOptions.setAppConfig(this.getAppConfig());
     erlangDebugOptions.setAutoUpdateModulesNotToInterpret(myAutoUpdateModulesNotToInterpretCheckBox.isSelected());
-    erlangDebugOptions.setIncludeRebarDependencies(this.includeRebarDependenenciesFromJBCheckBox.isSelected());
-    erlangDebugOptions.setFetchingDependencies(this.fetchDependencies.isSelected());
     Set<String> modules = erlangDebugOptions.isAutoUpdateModulesNotToInterpret() ? Collections.<String>emptySet() :
       ContainerUtil.map2Set(myModulesNotToInterpretListModel.getItems(),
                             String::valueOf);
@@ -98,17 +91,6 @@ public class ErlangDebugOptionsEditorForm extends SettingsEditor<ErlangRunConfig
     myAutoUpdateModulesNotToInterpretCheckBox.setSelected(autoUpdate);
     myModulesNotToInterpretPanel.setEnabled(!autoUpdate);
     myModulesNotToInterpretList.setEnabled(!autoUpdate);
-  }
-
-  private void setIncludeRebarDependenciesFromCheckBox(boolean includeDeps) {
-    includeRebarDependenenciesFromJBCheckBox.setSelected(includeDeps);
-    fetchDependencies.setEnabled(includeRebarDependenenciesFromJBCheckBox.isSelected());
-    if (!includeRebarDependenenciesFromJBCheckBox.isSelected())
-      fetchDependencies.setSelected(false);
-  }
-
-  private void setFetchDependenciesFromCheckBox(boolean includeDeps) {
-    fetchDependencies.setSelected(includeDeps);
   }
 
   private void setloadConfig(boolean includeConfig) {

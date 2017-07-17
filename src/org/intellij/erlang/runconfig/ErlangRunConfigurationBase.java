@@ -126,11 +126,8 @@ public abstract class ErlangRunConfigurationBase<RunningState extends ErlangRunn
   protected abstract RunningState newRunningState(ExecutionEnvironment env, Module module);
 
   public static final class ErlangDebugOptions implements Serializable {
-    private boolean includeRebarDependencies = false;
-    private boolean fetchingDependencies = false;
     private boolean myAutoUpdateModulesNotToInterpret = true;
 
-    private Set<String> rebarDependencies = new HashSet<>();
     private Set<String> myModulesNotToInterpret = new HashSet<>();
 
     private boolean loadingConfig = false;
@@ -151,22 +148,6 @@ public abstract class ErlangRunConfigurationBase<RunningState extends ErlangRunn
 
     public String getAppConfig() {
       return appConfig;
-    }
-
-    public boolean isIncludingRebarDependencies() {
-      return this.includeRebarDependencies;
-    }
-
-    public void setIncludeRebarDependencies(boolean includeRebarDependencies) {
-      this.includeRebarDependencies=includeRebarDependencies;
-    }
-
-    public boolean isFetchingDependencies() {
-      return this.fetchingDependencies;
-    }
-
-    public void setFetchingDependencies(boolean fetchingDependencies) {
-      this.fetchingDependencies=fetchingDependencies;
     }
 
     public boolean isAutoUpdateModulesNotToInterpret() {
@@ -195,8 +176,6 @@ public abstract class ErlangRunConfigurationBase<RunningState extends ErlangRunn
 
       if (myAutoUpdateModulesNotToInterpret != that.myAutoUpdateModulesNotToInterpret) return false;
       if (!myModulesNotToInterpret.equals(that.myModulesNotToInterpret)) return false;
-      if (includeRebarDependencies!=that.includeRebarDependencies) return false;
-      if (fetchingDependencies!=that.fetchingDependencies) return false;
 
       return true;
     }
